@@ -8,6 +8,13 @@ AndroidIDE is a premium mobile IDE designed for Android development with AI-powe
 
 Preferred communication style: Simple, everyday language.
 
+## Version 2 Requirements (Advanced Features)
+- Advanced code editor with VS Code-like features
+- Termux-based terminal integration
+- Gradle support for Android development
+- Full Android Studio-like development environment
+- Advanced project management and build system integration
+
 ## System Architecture
 
 ### Frontend Architecture

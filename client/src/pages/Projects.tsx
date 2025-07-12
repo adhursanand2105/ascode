@@ -12,7 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { isUnauthorizedError } from "@/lib/authUtils";
 import ProjectCard from "@/components/ProjectCard";
-import { Plus, Search, Filter, FolderOpen } from "lucide-react";
+import AdvancedCodeEditor from "@/components/AdvancedCodeEditor";
+import { Plus, Search, Filter, FolderOpen, Code, Smartphone, Zap } from "lucide-react";
 
 export default function Projects() {
   const { toast } = useToast();
@@ -20,6 +21,8 @@ export default function Projects() {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
+  const [isAdvancedEditorOpen, setIsAdvancedEditorOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<any>(null);
   const [newProject, setNewProject] = useState({
     name: "",
     description: "",
@@ -196,6 +199,72 @@ export default function Projects() {
         </Select>
       </div>
 
+      {/* Quick Actions for Android Development */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+        <Card className="bg-gradient-to-r from-blue-600 to-blue-700 border-blue-500 text-white">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold">Android Studio IDE</h3>
+                <p className="text-sm text-blue-100">Full-featured development environment</p>
+              </div>
+              <Smartphone className="h-8 w-8 text-blue-200" />
+            </div>
+            <Button 
+              onClick={() => setIsAdvancedEditorOpen(true)}
+              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30"
+            >
+              <Code className="w-4 h-4 mr-2" />
+              Open IDE
+            </Button>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-gradient-to-r from-green-600 to-green-700 border-green-500 text-white">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold">Gradle Build System</h3>
+                <p className="text-sm text-green-100">Build and manage dependencies</p>
+              </div>
+              <Zap className="h-8 w-8 text-green-200" />
+            </div>
+            <Button 
+              onClick={() => {
+                setIsAdvancedEditorOpen(true);
+                // Auto-open terminal for gradle commands
+              }}
+              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30"
+            >
+              <Zap className="w-4 h-4 mr-2" />
+              Build Project
+            </Button>
+          </CardContent>
+        </Card>
+        
+        <Card className="bg-gradient-to-r from-purple-600 to-purple-700 border-purple-500 text-white">
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-semibold">Termux Terminal</h3>
+                <p className="text-sm text-purple-100">Linux terminal environment</p>
+              </div>
+              <FolderOpen className="h-8 w-8 text-purple-200" />
+            </div>
+            <Button 
+              onClick={() => {
+                setIsAdvancedEditorOpen(true);
+                // Auto-open terminal
+              }}
+              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30"
+            >
+              <FolderOpen className="w-4 h-4 mr-2" />
+              Open Terminal
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+
       {/* Projects Grid */}
       {isLoading ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -240,6 +309,13 @@ export default function Projects() {
           )}
         </div>
       )}
+      
+      {/* Advanced Code Editor */}
+      <AdvancedCodeEditor
+        isOpen={isAdvancedEditorOpen}
+        onClose={() => setIsAdvancedEditorOpen(false)}
+        projectId={selectedProject?.id}
+      />
     </div>
   );
 }

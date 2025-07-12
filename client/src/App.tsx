@@ -30,7 +30,7 @@ function Router() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowSplash(false);
-    }, 3000);
+    }, 1500); // Reduce splash time to 1.5 seconds
     return () => clearTimeout(timer);
   }, []);
 
