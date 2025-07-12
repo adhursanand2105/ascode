@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Primary Meta Tags -->
+    <title>AndroidIDE - Premium Mobile IDE with AI Integration</title>
+    <meta name="title" content="AndroidIDE - Premium Mobile IDE with AI Integration" />
+    <meta name="description" content="Build full-featured Android apps directly on your mobile device with AI-powered code analysis, advanced bug tracking, and real-time team collaboration. The ultimate premium development platform." />
+    <meta name="keywords" content="android ide, mobile development, ai coding, bug tracking, code analysis, team collaboration, mobile ide, android studio alternative" />
+    <meta name="author" content="AndroidIDE Team" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Theme and App Configuration -->
+    <meta name="theme-color" content="#FFD700" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="AndroidIDE" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://androidide.com/" />
+    <meta property="og:title" content="AndroidIDE - Premium Mobile IDE with AI Integration" />
+    <meta property="og:description" content="Build full-featured Android apps directly on your mobile device with AI-powered code analysis, advanced bug tracking, and real-time team collaboration." />
+    <meta property="og:image" content="https://androidide.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="AndroidIDE" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://androidide.com/" />
+    <meta property="twitter:title" content="AndroidIDE - Premium Mobile IDE with AI Integration" />
+    <meta property="twitter:description" content="Build full-featured Android apps directly on your mobile device with AI-powered code analysis, advanced bug tracking, and real-time team collaboration." />
+    <meta property="twitter:image" content="https://androidide.com/twitter-image.png" />
+    <meta property="twitter:creator" content="@AndroidIDE" />
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://api.openai.com" />
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "AndroidIDE",
+      "description": "Premium mobile IDE with AI integration for Android development",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Android, Web",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "AndroidIDE Team"
+      },
+      "url": "https://androidide.com",
+      "screenshot": "https://androidide.com/screenshot.png",
+      "featureList": [
+        "AI-powered code analysis",
+        "Advanced bug tracking",
+        "Real-time team collaboration",
+        "Mobile-first development",
+        "Smart code completion",
+        "Performance optimization"
+      ]
+    }
+    </script>
+    
+    <!-- Security Headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    
+    <!-- Performance hints -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//fonts.gstatic.com" />
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com" />
+    
+    <!-- Critical CSS will be inlined here by build process -->
+    <style>
+      /* Critical loading styles */
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #1A1A1A;
+        color: #F3F4F6;
+        margin: 0;
+        padding: 0;
+        overflow-x: hidden;
+      }
+      
+      /* Loading screen styles */
+      #loading {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1A1A1A, #2C2C2C);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 3px solid #2C2C2C;
+        border-top: 3px solid #FFD700;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      /* Hide loading screen once React loads */
+      #root:not(:empty) + #loading {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- App container -->
+    <div id="root"></div>
+    
+    <!-- Fallback loading screen -->
+    <div id="loading">
+      <div style="text-align: center;">
+        <div class="loading-spinner"></div>
+        <p style="margin-top: 1rem; color: #9CA3AF; font-size: 0.875rem;">Loading AndroidIDE...</p>
+      </div>
+    </div>
+    
+    <!-- Vite script -->
+    <script type="module" src="/src/main.tsx"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator && location.protocol === 'https:') {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
+    <!-- Analytics placeholder (replace with actual analytics) -->
+    <script>
+      // Analytics initialization would go here
+      // Example: Google Analytics, Mixpanel, etc.
+    </script>
+    
+    <!-- Error boundary fallback -->
+    <script>
+      window.addEventListener('error', (event) => {
+        console.error('Global error:', event.error);
+        // Could send to error reporting service
+      });
+      
+      window.addEventListener('unhandledrejection', (event) => {
+        console.error('Unhandled promise rejection:', event.reason);
+        // Could send to error reporting service
+      });
+    </script>
+  </body>
+</html>
