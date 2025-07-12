@@ -31,8 +31,11 @@ export function getSession() {
     ttl: sessionTtl,
     tableName: "sessions",
   });
+  const sessionSecret = process.env.SESSION_SECRET || "androidide-development-secret-key-2025";
+  console.log("Session secret configured:", sessionSecret ? "yes" : "no");
+  
   return session({
-    secret: process.env.SESSION_SECRET || "androidide-development-secret-key-" + Math.random().toString(36).substring(2, 15),
+    secret: sessionSecret,
     store: sessionStore,
     resave: false,
     saveUninitialized: false,

@@ -12,14 +12,39 @@ export async function registerRoutes(app: Express): Promise<Server> {
   await setupAuth(app);
 
   // Auth routes
-  app.get('/api/auth/user', isAuthenticated, async (req: any, res) => {
+  app.get('/api/auth/user', async (req: any, res) => {
     try {
+      console.log("Auth check - isAuthenticated:", req.isAuthenticated());
+      console.log("Auth check - user:", req.user ? "exists" : "null");
+      console.log("Auth check - session:", req.session ? "exists" : "null");
+      
+      if (!req.isAuthenticated() || !req.user) {
+        return res.status(401).json({ message: "Not authenticated" });
+      }
+      
       const userId = req.user.claims.sub;
+      console.log("Auth check - userId:", userId);
+      
       const user = await storage.getUser(userId);
+      console.log("Auth check - user from DB:", user ? "found" : "not found");
+      
+      if (!user) {
+        // If user doesn't exist in database, create them from the session claims
+        const claims = req.user.claims;
+        const newUser = await storage.upsertUser({
+          id: claims.sub,
+          email: claims.email,
+          firstName: claims.first_name,
+          lastName: claims.last_name,
+          profileImageUrl: claims.profile_image_url,
+        });
+        return res.json(newUser);
+      }
+      
       res.json(user);
     } catch (error) {
       console.error("Error fetching user:", error);
-      res.status(500).json({ message: "Failed to fetch user" });
+      res.status(500).json({ message: "Authentication failed" });
     }
   });
 
