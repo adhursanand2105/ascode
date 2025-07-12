@@ -43,7 +43,7 @@ export default function Landing() {
 
   const handleSkipLogin = () => {
     // Skip login and go directly to the dashboard
-    window.location.href = "/projects";
+    window.location.href = "/dashboard";
   };
 
   const handleFormSubmit = (e: React.FormEvent) => {

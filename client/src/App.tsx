@@ -42,47 +42,37 @@ function Router() {
 
   return (
     <Switch>
-      {isLoading ? (
-        <Route path="/" component={Landing} />
-      ) : !isAuthenticated ? (
-        <>
-          <Route path="/" component={Landing} />
-          <Route path="/projects" component={() => (
-            <Layout>
-              <Projects />
-            </Layout>
-          )} />
-          <Route path="/bugs" component={() => (
-            <Layout>
-              <BugTracker />
-            </Layout>
-          )} />
-          <Route path="/analytics" component={() => (
-            <Layout>
-              <Analytics />
-            </Layout>
-          )} />
-          <Route path="/team" component={() => (
-            <Layout>
-              <Team />
-            </Layout>
-          )} />
-          <Route path="/settings" component={() => (
-            <Layout>
-              <Settings />
-            </Layout>
-          )} />
-        </>
-      ) : (
+      <Route path="/" component={Landing} />
+      <Route path="/projects" component={() => (
         <Layout>
-          <Route path="/" component={Dashboard} />
-          <Route path="/projects" component={Projects} />
-          <Route path="/bugs" component={BugTracker} />
-          <Route path="/analytics" component={Analytics} />
-          <Route path="/team" component={Team} />
-          <Route path="/settings" component={Settings} />
+          <Projects />
         </Layout>
-      )}
+      )} />
+      <Route path="/bugs" component={() => (
+        <Layout>
+          <BugTracker />
+        </Layout>
+      )} />
+      <Route path="/analytics" component={() => (
+        <Layout>
+          <Analytics />
+        </Layout>
+      )} />
+      <Route path="/team" component={() => (
+        <Layout>
+          <Team />
+        </Layout>
+      )} />
+      <Route path="/settings" component={() => (
+        <Layout>
+          <Settings />
+        </Layout>
+      )} />
+      <Route path="/dashboard" component={() => (
+        <Layout>
+          <Dashboard />
+        </Layout>
+      )} />
       <Route component={NotFound} />
     </Switch>
   );
