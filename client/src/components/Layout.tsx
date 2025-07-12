@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation } from "wouter";
+import { useLocation } from "wouter";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -86,21 +86,23 @@ export default function Layout({ children }: LayoutProps) {
           {navigation.map((item) => {
             const Icon = item.icon;
             return (
-              <Link 
-                key={item.name} 
-                href={item.href}
+              <button
+                key={item.name}
+                onClick={() => {
+                  window.location.href = item.href;
+                  setSidebarOpen(false);
+                }}
                 className={`
-                  flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200
+                  w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200
                   ${isActive(item.href) 
                     ? 'bg-gradient-to-r from-gold-500/20 to-gold-400/20 border-l-3 border-gold-500 text-gray-100' 
                     : 'text-gray-400 hover:bg-charcoal-700 hover:text-gray-100'
                   }
                 `}
-                onClick={() => setSidebarOpen(false)}
               >
                 <Icon className="w-5 h-5" />
                 <span>{item.name}</span>
-              </Link>
+              </button>
             );
           })}
         </nav>

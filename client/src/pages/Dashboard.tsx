@@ -26,18 +26,14 @@ export default function Dashboard() {
   const { user, isAuthenticated, isLoading } = useAuth();
   const [notifications, setNotifications] = useState(3);
 
-  // Redirect to login if not authenticated
+  // Show demo mode banner for unauthenticated users
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
       toast({
-        title: "Unauthorized",
-        description: "You are logged out. Logging in again...",
-        variant: "destructive",
+        title: "Demo Mode",
+        description: "You're viewing in demo mode. Sign in for full features.",
+        variant: "default",
       });
-      setTimeout(() => {
-        window.location.href = "/api/login";
-      }, 500);
-      return;
     }
   }, [isAuthenticated, isLoading, toast]);
 
@@ -65,13 +61,68 @@ export default function Dashboard() {
     retry: false,
   });
 
-  if (isLoading || !isAuthenticated) {
+  // Demo data for unauthenticated users
+  const demoStats = {
+    projectCount: 3,
+    bugCount: 7,
+    resolvedBugs: 15,
+    teamMemberCount: 2
+  };
+
+  const demoProjects = [
+    {
+      id: 'demo-1',
+      name: 'Weather App',
+      description: 'Modern weather application with beautiful UI',
+      language: 'Kotlin',
+      status: 'active',
+      lastBuild: '2024-01-15T10:30:00Z',
+      createdAt: '2024-01-10T09:00:00Z',
+      updatedAt: '2024-01-15T10:30:00Z'
+    },
+    {
+      id: 'demo-2',
+      name: 'E-commerce App',
+      description: 'Full-featured shopping application',
+      language: 'Java',
+      status: 'building',
+      lastBuild: '2024-01-14T16:20:00Z',
+      createdAt: '2024-01-08T14:00:00Z',
+      updatedAt: '2024-01-14T16:20:00Z'
+    }
+  ];
+
+  const demoBugs = [
+    {
+      id: 'demo-bug-1',
+      title: 'Login form validation issue',
+      priority: 'high',
+      status: 'open',
+      createdAt: '2024-01-15T08:00:00Z',
+      updatedAt: '2024-01-15T08:00:00Z'
+    },
+    {
+      id: 'demo-bug-2',
+      title: 'Image loading performance',
+      priority: 'medium',
+      status: 'in_progress',
+      createdAt: '2024-01-14T12:00:00Z',
+      updatedAt: '2024-01-14T12:00:00Z'
+    }
+  ];
+
+  if (isLoading) {
     return (
       <div className="flex items-center justify-center h-screen">
         <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-gold-500"></div>
       </div>
     );
   }
+
+  // Use real data if authenticated, demo data otherwise
+  const displayStats = isAuthenticated ? stats : demoStats;
+  const displayProjects = isAuthenticated ? projects : demoProjects;
+  const displayBugs = isAuthenticated ? bugs : demoBugs;
 
   return (
     <div className="flex-1 p-6 overflow-y-auto">
@@ -103,19 +154,19 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
         <StatsCard
           title="Active Projects"
-          value={stats?.projectCount || 0}
+          value={displayStats?.projectCount || 0}
           icon={FolderOpen}
           gradient="from-blue-500 to-blue-600"
           change="+2 this week"
-          loading={statsLoading}
+          loading={statsLoading && isAuthenticated}
         />
         <StatsCard
           title="Bugs Fixed"
-          value={stats?.resolvedBugs || 0}
+          value={displayStats?.resolvedBugs || 0}
           icon={Bug}
           gradient="from-red-500 to-red-600"
           change="+8 today"
-          loading={statsLoading}
+          loading={statsLoading && isAuthenticated}
         />
         <StatsCard
           title="Hours Coded"
@@ -127,11 +178,11 @@ export default function Dashboard() {
         />
         <StatsCard
           title="Team Members"
-          value={stats?.teamMemberCount || 0}
+          value={displayStats?.teamMemberCount || 0}
           icon={Users}
           gradient="from-purple-500 to-purple-600"
           change="+1 this month"
-          loading={statsLoading}
+          loading={statsLoading && isAuthenticated}
         />
       </div>
 
@@ -149,14 +200,14 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {projectsLoading ? (
+              {(projectsLoading && isAuthenticated) ? (
                 <div className="space-y-4">
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="h-16 bg-charcoal-700 rounded-xl animate-pulse" />
                   ))}
                 </div>
-              ) : projects?.length ? (
-                projects.slice(0, 3).map((project: any) => (
+              ) : displayProjects?.length ? (
+                displayProjects.slice(0, 3).map((project: any) => (
                   <ProjectCard key={project.id} project={project} />
                 ))
               ) : (
@@ -181,14 +232,14 @@ export default function Dashboard() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {bugsLoading ? (
+              {(bugsLoading && isAuthenticated) ? (
                 <div className="space-y-4">
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="h-16 bg-charcoal-700 rounded-xl animate-pulse" />
                   ))}
                 </div>
-              ) : bugs?.length ? (
-                bugs.slice(0, 3).map((bug: any) => (
+              ) : displayBugs?.length ? (
+                displayBugs.slice(0, 3).map((bug: any) => (
                   <BugCard key={bug.id} bug={bug} />
                 ))
               ) : (
