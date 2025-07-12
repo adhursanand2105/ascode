@@ -84,20 +84,20 @@ export default function Layout({ children }: LayoutProps) {
         {/* Navigation */}
         <nav className="flex-1 p-4 space-y-2">
           {navigation.map((item) => (
-            <Link key={item.name} href={item.href}>
-              <a
-                className={`
-                  flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200
-                  ${isActive(item.href) 
-                    ? 'bg-gradient-to-r from-gold-500/20 to-gold-400/20 border-l-3 border-gold-500 text-gray-100' 
-                    : 'text-gray-400 hover:bg-charcoal-700 hover:text-gray-100'
-                  }
-                `}
-                onClick={() => setSidebarOpen(false)}
-              >
-                <item.icon className="w-5 h-5" />
-                <span>{item.name}</span>
-              </a>
+            <Link 
+              key={item.name} 
+              href={item.href}
+              className={`
+                flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-200
+                ${isActive(item.href) 
+                  ? 'bg-gradient-to-r from-gold-500/20 to-gold-400/20 border-l-3 border-gold-500 text-gray-100' 
+                  : 'text-gray-400 hover:bg-charcoal-700 hover:text-gray-100'
+                }
+              `}
+              onClick={() => setSidebarOpen(false)}
+            >
+              <item.icon className="w-5 h-5" />
+              <span>{item.name}</span>
             </Link>
           ))}
         </nav>
