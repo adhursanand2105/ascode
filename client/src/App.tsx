@@ -25,14 +25,16 @@ const queryClient = new QueryClient({
 
 function Router() {
   const { isAuthenticated, isLoading } = useAuth();
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(false); // Disable splash screen
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowSplash(false);
-    }, 1500); // Reduce splash time to 1.5 seconds
-    return () => clearTimeout(timer);
-  }, []);
+    if (showSplash) {
+      const timer = setTimeout(() => {
+        setShowSplash(false);
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [showSplash]);
 
   if (showSplash) {
     return <SplashScreen />;
@@ -40,8 +42,37 @@ function Router() {
 
   return (
     <Switch>
-      {isLoading || !isAuthenticated ? (
+      {isLoading ? (
         <Route path="/" component={Landing} />
+      ) : !isAuthenticated ? (
+        <>
+          <Route path="/" component={Landing} />
+          <Route path="/projects" component={() => (
+            <Layout>
+              <Projects />
+            </Layout>
+          )} />
+          <Route path="/bugs" component={() => (
+            <Layout>
+              <BugTracker />
+            </Layout>
+          )} />
+          <Route path="/analytics" component={() => (
+            <Layout>
+              <Analytics />
+            </Layout>
+          )} />
+          <Route path="/team" component={() => (
+            <Layout>
+              <Team />
+            </Layout>
+          )} />
+          <Route path="/settings" component={() => (
+            <Layout>
+              <Settings />
+            </Layout>
+          )} />
+        </>
       ) : (
         <Layout>
           <Route path="/" component={Dashboard} />

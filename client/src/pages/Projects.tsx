@@ -212,7 +212,7 @@ export default function Projects() {
             </div>
             <Button 
               onClick={() => setIsAdvancedEditorOpen(true)}
-              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30"
+              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30 hover:scale-[1.02] transition-all duration-200"
             >
               <Code className="w-4 h-4 mr-2" />
               Open IDE
@@ -234,7 +234,7 @@ export default function Projects() {
                 setIsAdvancedEditorOpen(true);
                 // Auto-open terminal for gradle commands
               }}
-              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30"
+              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30 hover:scale-[1.02] transition-all duration-200"
             >
               <Zap className="w-4 h-4 mr-2" />
               Build Project
@@ -256,7 +256,7 @@ export default function Projects() {
                 setIsAdvancedEditorOpen(true);
                 // Auto-open terminal
               }}
-              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30"
+              className="w-full mt-3 bg-white/20 hover:bg-white/30 text-white border-white/30 hover:scale-[1.02] transition-all duration-200"
             >
               <FolderOpen className="w-4 h-4 mr-2" />
               Open Terminal
